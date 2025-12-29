@@ -1,113 +1,47 @@
 <script setup lang="ts">
 const exercises = [
-  {
-    name: '三位数加减法',
-    description: '100-999 范围内的加减法练习',
-    route: '/calculation',
-    icon: 'i-lucide-plus'
-  },
-  {
-    name: '进位借位练习',
-    description: '带进位的加法和借位的减法',
-    route: '/calculation1',
-    icon: 'i-lucide-calculator'
-  },
-  {
-    name: '乘除法练习',
-    description: '两位数乘除一位数',
-    route: '/calculation2',
-    icon: 'i-lucide-x'
-  },
-  {
-    name: '三数连算',
-    description: '三个三位数的连续加减运算',
-    route: '/calculation3',
-    icon: 'i-lucide-sigma'
-  },
-  {
-    name: '三数连算 II',
-    description: '三个三位数的连续加减运算',
-    route: '/calculation4',
-    icon: 'i-lucide-repeat'
-  },
-  {
-    name: '综合练习',
-    description: '加减乘混合运算',
-    route: '/calculation5',
-    icon: 'i-lucide-target'
-  },
-  {
-    name: '19×19 乘法',
-    description: '19以内乘法练习，排除简单一位数乘法',
-    route: '/multiplication19',
-    icon: 'i-lucide-grid-3x3'
-  },
-  {
-    name: '带余数除法',
-    description: '练习有余数的除法运算',
-    route: '/division-remainder',
-    icon: 'i-lucide-divide'
-  },
-  {
-    name: '小数加减法',
-    description: '小数点对齐的加减运算',
-    route: '/decimal',
-    icon: 'i-lucide-percent'
-  },
-  {
-    name: '分数加减法',
-    description: '同分母分数的加减运算',
-    route: '/fraction',
-    icon: 'i-lucide-slice'
-  },
-  {
-    name: '时间计算',
-    description: '计算时间间隔，跨整点练习',
-    route: '/time-calc',
-    icon: 'i-lucide-clock'
-  },
-  {
-    name: '人民币换算',
-    description: '元角分换算和找零练习',
-    route: '/money',
-    icon: 'i-lucide-coins'
-  },
-  {
-    name: '单位换算',
-    description: '长度和重量单位换算',
-    route: '/unit-convert',
-    icon: 'i-lucide-ruler'
-  },
-  {
-    name: '填空算式',
-    description: '逆向思维，求未知数',
-    route: '/fill-blank',
-    icon: 'i-lucide-square'
-  },
-  {
-    name: '比大小',
-    description: '比较两个算式的大小',
-    route: '/compare',
-    icon: 'i-lucide-scale'
-  },
-  {
-    name: '找规律填数',
-    description: '数列规律，培养数感',
-    route: '/number-pattern',
-    icon: 'i-lucide-list-ordered'
-  },
-  {
-    name: '限时口算',
-    description: '计时挑战，训练速度',
-    route: '/speed-calc',
-    icon: 'i-lucide-zap'
-  },
-  {
-    name: '连续进位/借位',
-    description: '专项强化进位借位',
-    route: '/carry-practice',
-    icon: 'i-lucide-arrow-up-down'
-  }
+  // 基础运算
+  { name: '三位数加减法', description: '100-999 范围内的加减法练习', route: '/calculation', icon: 'i-lucide-plus' },
+  { name: '进位借位练习', description: '带进位的加法和借位的减法', route: '/calculation1', icon: 'i-lucide-calculator' },
+  { name: '乘除法练习', description: '两位数乘除一位数', route: '/calculation2', icon: 'i-lucide-x' },
+  { name: '三数连算', description: '三个三位数的连续加减运算', route: '/calculation3', icon: 'i-lucide-sigma' },
+  { name: '三数连算 II', description: '三个三位数的连续加减运算', route: '/calculation4', icon: 'i-lucide-repeat' },
+  { name: '综合练习', description: '加减乘混合运算', route: '/calculation5', icon: 'i-lucide-target' },
+  { name: '19×19 乘法', description: '19以内乘法练习，排除简单一位数乘法', route: '/multiplication19', icon: 'i-lucide-grid-3x3' },
+  { name: '带余数除法', description: '练习有余数的除法运算', route: '/division-remainder', icon: 'i-lucide-divide' },
+  { name: '竖式计算', description: '用竖式计算加减乘除', route: '/vertical-calc', icon: 'i-lucide-align-vertical-justify-center' },
+  { name: '估算练习', description: '估计结果，取整到十位或百位', route: '/estimate', icon: 'i-lucide-target' },
+  { name: '凑整练习', description: '凑成整十、整百', route: '/round-number', icon: 'i-lucide-circle-dot' },
+  { name: '连续进位/借位', description: '专项强化进位借位', route: '/carry-practice', icon: 'i-lucide-arrow-up-down' },
+  // 小数分数
+  { name: '小数加减法', description: '小数点对齐的加减运算', route: '/decimal', icon: 'i-lucide-percent' },
+  { name: '分数加减法', description: '同分母分数的加减运算', route: '/fraction', icon: 'i-lucide-slice' },
+  // 数的认识
+  { name: '数位练习', description: '认识个、十、百、千位', route: '/place-value', icon: 'i-lucide-hash' },
+  { name: '奇偶数判断', description: '判断奇偶数及运算规律', route: '/odd-even', icon: 'i-lucide-toggle-left' },
+  { name: '因数与倍数', description: '找因数、倍数、公因数、公倍数', route: '/factor-multiple', icon: 'i-lucide-link' },
+  // 单位换算
+  { name: '时间计算', description: '计算时间间隔，跨整点练习', route: '/time-calc', icon: 'i-lucide-clock' },
+  { name: '人民币换算', description: '元角分换算和找零练习', route: '/money', icon: 'i-lucide-coins' },
+  { name: '单位换算', description: '长度和重量单位换算', route: '/unit-convert', icon: 'i-lucide-ruler' },
+  // 图形几何
+  { name: '周长计算', description: '正方形、长方形周长', route: '/perimeter', icon: 'i-lucide-square' },
+  { name: '面积计算', description: '正方形、长方形面积', route: '/area', icon: 'i-lucide-box' },
+  { name: '图形计数', description: '数三角形、正方形个数', route: '/count-shapes', icon: 'i-lucide-shapes' },
+  // 逻辑思维
+  { name: '填空算式', description: '逆向思维，求未知数', route: '/fill-blank', icon: 'i-lucide-square-asterisk' },
+  { name: '比大小', description: '比较两个算式的大小', route: '/compare', icon: 'i-lucide-scale' },
+  { name: '找规律填数', description: '数列规律，培养数感', route: '/number-pattern', icon: 'i-lucide-list-ordered' },
+  { name: '24点游戏', description: '四个数凑24，训练思维', route: '/game24', icon: 'i-lucide-dices' },
+  { name: '数独 4×4', description: '简化版数独，逻辑训练', route: '/sudoku', icon: 'i-lucide-grid-2x2' },
+  { name: '火柴棒游戏', description: '移动火柴使等式成立', route: '/matchstick', icon: 'i-lucide-flame' },
+  // 应用题
+  { name: '应用题', description: '购物、分配等场景文字题', route: '/word-problem', icon: 'i-lucide-book-open' },
+  { name: '行程问题', description: '速度×时间=路程', route: '/speed-distance', icon: 'i-lucide-car' },
+  { name: '植树问题', description: '间隔数与棵数的关系', route: '/tree-planting', icon: 'i-lucide-tree-pine' },
+  { name: '鸡兔同笼', description: '经典问题，锻炼逻辑', route: '/chicken-rabbit', icon: 'i-lucide-rabbit' },
+  // 速度训练
+  { name: '限时口算', description: '计时挑战，训练速度', route: '/speed-calc', icon: 'i-lucide-zap' },
 ]
 </script>
 
