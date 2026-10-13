@@ -52,8 +52,8 @@ onMounted(() => generate())
             :key="idx"
             class="border border-slate-200 dark:border-slate-700 rounded-xl p-6"
           >
-            <div class="text-sm text-slate-500 dark:text-slate-400 mb-2">
-              {{ idx + 1 }}. {{ problem.hint }}使等式成立
+            <div class="problem-item text-sm text-slate-500 dark:text-slate-400 mb-2">
+              {{ problem.hint }}使等式成立
             </div>
             <div class="text-3xl font-mono text-center py-4 text-slate-800 dark:text-slate-100">
               {{ problem.equation }}

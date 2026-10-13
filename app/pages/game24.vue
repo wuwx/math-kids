@@ -82,24 +82,21 @@ onMounted(() => generate())
       class="problem-row"
     >
       <td class="p-4 align-top">
-        <div class="problem-item">
-          <div class="flex items-center gap-4 mb-3">
-            <span class="text-slate-500">{{ idx + 1 }}.</span>
-            <div class="flex gap-3">
-              <span
-                v-for="(num, j) in problem.numbers"
-                :key="j"
-                class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-xl font-bold text-slate-800 dark:text-slate-100"
-              >
-                {{ num }}
-              </span>
-            </div>
+        <div class="flex items-center gap-4 mb-3 problem-item">
+          <div class="flex gap-3">
+            <span
+              v-for="(num, j) in problem.numbers"
+              :key="j"
+              class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-xl font-bold text-slate-800 dark:text-slate-100"
+            >
+              {{ num }}
+            </span>
           </div>
-          <div class="text-sm text-slate-500 mb-2">
-            算式：
-          </div>
-          <div class="border-b border-slate-300 dark:border-slate-600 h-8" />
         </div>
+        <div class="text-sm text-slate-500 mb-2">
+          算式：
+        </div>
+        <div class="border-b border-slate-300 dark:border-slate-600 h-8" />
       </td>
     </tr>
   </ExerciseShell>

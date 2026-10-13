@@ -65,8 +65,8 @@ onMounted(() => generate())
             :key="idx"
             class="border border-slate-200 dark:border-slate-700 rounded-xl p-6"
           >
-            <div class="text-base text-slate-800 dark:text-gray-100 mb-4">
-              {{ idx + 1 }}. 数一数下图中有多少个{{ problem.type }}？
+            <div class="problem-item text-base text-slate-800 dark:text-gray-100 mb-4">
+              数一数下图中有多少个{{ problem.type }}？
             </div>
 
             <div class="flex justify-center mb-4">

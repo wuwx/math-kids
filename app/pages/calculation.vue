@@ -204,26 +204,20 @@ onMounted(() => {
         class="problem-row"
       >
         <td class="p-2 w-1/2 align-top">
-          <div
-            v-if="problems[rowIndex * 2]"
-            class="problem-item"
-          >
-            <div class="text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100 tabular-nums">
+          <template v-if="problems[rowIndex * 2]">
+            <div class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100 tabular-nums">
               {{ problems[rowIndex * 2] }}
             </div>
             <div class="mt-2 border border-dashed border-slate-300 dark:border-slate-700 rounded h-20 print:h-22" />
-          </div>
+          </template>
         </td>
         <td class="p-2 w-1/2 align-top">
-          <div
-            v-if="problems[rowIndex * 2 + 1]"
-            class="problem-item"
-          >
-            <div class="text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100 tabular-nums">
+          <template v-if="problems[rowIndex * 2 + 1]">
+            <div class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100 tabular-nums">
               {{ problems[rowIndex * 2 + 1] }}
             </div>
             <div class="mt-2 border border-dashed border-slate-300 dark:border-slate-700 rounded h-20 print:h-22" />
-          </div>
+          </template>
         </td>
       </tr>
     </template>

@@ -32,3 +32,25 @@
     page-break-inside: avoid;
   }
 }
+
+/* 题目自动编号：每个 .problem-item 自动生成序号 */
+.worksheet {
+  counter-reset: problem;
+}
+
+.problem-item {
+  counter-increment: problem;
+}
+
+.problem-item::before {
+  content: counter(problem) ".";
+  display: inline-block;
+  min-width: 1.75em;
+  margin-right: 0.25em;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.dark .problem-item::before {
+  color: #94a3b8;
+}

@@ -99,15 +99,12 @@ onMounted(() => generate())
         :key="colIndex"
         class="p-4 w-1/2 align-top"
       >
-        <div
-          v-if="problems[rowIndex * 2 + colIndex - 1]"
-          class="problem-item"
-        >
-          <div class="text-lg font-mono text-slate-800 dark:text-gray-100 mb-2">
+        <template v-if="problems[rowIndex * 2 + colIndex - 1]">
+          <div class="problem-item text-lg font-mono text-slate-800 dark:text-gray-100 mb-2 tabular-nums">
             {{ problems[rowIndex * 2 + colIndex - 1].a }} {{ problems[rowIndex * 2 + colIndex - 1].op }} {{ problems[rowIndex * 2 + colIndex - 1].b }} =
           </div>
           <div class="border border-dashed border-slate-300 dark:border-slate-600 rounded h-32 print:h-36" />
-        </div>
+        </template>
       </td>
     </tr>
   </ExerciseShell>

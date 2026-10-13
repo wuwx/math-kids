@@ -81,7 +81,7 @@ onMounted(() => generate())
     >
       <td class="p-3 align-top">
         <div class="problem-item text-lg text-slate-800 dark:text-gray-100">
-          {{ idx + 1 }}. {{ problem.question }}
+          {{ problem.question }}
         </div>
       </td>
     </tr>

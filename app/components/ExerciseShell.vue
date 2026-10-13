@@ -51,21 +51,20 @@ function printPage() {
         <thead>
           <tr>
             <th class="p-0 text-left">
-              <div class="flex justify-between items-center gap-4 pb-4 mb-4 border-b-2 border-slate-200 dark:border-slate-800 print:border-gray-400">
+              <div class="flex justify-between items-center gap-4 flex-wrap pb-4 mb-4 border-b-2 border-slate-200 dark:border-slate-800 print:border-gray-400">
                 <div class="shrink-0 font-display text-xl font-semibold text-slate-800 dark:text-gray-100 whitespace-nowrap">
                   {{ title }}
                 </div>
-                <div class="text-slate-600 dark:text-slate-300 whitespace-nowrap">
-                  日期：<span class="inline-block w-28 border-b border-gray-400" />
-                </div>
-                <div class="text-slate-600 dark:text-slate-300 whitespace-nowrap">
-                  姓名：<span class="inline-block w-24 border-b border-gray-400" />
+                <div class="flex items-center gap-6 text-slate-600 dark:text-slate-300 whitespace-nowrap">
+                  <span>日期：<span class="inline-block w-24 border-b border-gray-400" /></span>
+                  <span>姓名：<span class="inline-block w-20 border-b border-gray-400" /></span>
+                  <span class="flex items-center gap-2">评分：<span class="inline-block w-14 h-7 border border-gray-400 rounded-sm" /></span>
                 </div>
               </div>
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="worksheet">
           <slot />
         </tbody>
       </table>

@@ -103,12 +103,10 @@ onMounted(() => generate())
       class="problem-row"
     >
       <td class="p-3 align-top">
-        <div class="problem-item">
-          <div class="text-base text-slate-800 dark:text-slate-100 mb-2">
-            {{ idx + 1 }}. {{ problem.question }}
-          </div>
-          <div class="border border-dashed border-slate-300 dark:border-slate-600 rounded h-24 print:h-28" />
+        <div class="problem-item text-base text-slate-800 dark:text-gray-100 mb-2 leading-relaxed">
+          {{ problem.question }}
         </div>
+        <div class="border border-dashed border-slate-300 dark:border-slate-600 rounded h-24 print:h-28" />
       </td>
     </tr>
   </ExerciseShell>

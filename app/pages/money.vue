@@ -99,10 +99,10 @@ onMounted(() => generate())
       >
         <div
           v-if="problems[rowIndex * 2 + colIndex - 1]"
-          class="problem-item text-slate-800 dark:text-gray-100"
+          class="text-slate-800 dark:text-gray-100"
         >
           <template v-if="problems[rowIndex * 2 + colIndex - 1].type === 'change'">
-            <div class="mb-1">
+            <div class="problem-item mb-1">
               商品 <span class="font-bold">{{ problems[rowIndex * 2 + colIndex - 1].data.price }}</span> 元
             </div>
             <div class="flex items-center gap-2">
@@ -112,21 +112,21 @@ onMounted(() => generate())
             </div>
           </template>
           <template v-else-if="problems[rowIndex * 2 + colIndex - 1].type === 'yuan2jiao'">
-            <div class="flex items-center gap-2">
+            <div class="problem-item flex items-center gap-2">
               <span>{{ problems[rowIndex * 2 + colIndex - 1].data.value }} 元 =</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>角</span>
             </div>
           </template>
           <template v-else-if="problems[rowIndex * 2 + colIndex - 1].type === 'jiao2fen'">
-            <div class="flex items-center gap-2">
+            <div class="problem-item flex items-center gap-2">
               <span>{{ problems[rowIndex * 2 + colIndex - 1].data.value }} 角 =</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>分</span>
             </div>
           </template>
           <template v-else-if="problems[rowIndex * 2 + colIndex - 1].type === 'yuan2fen'">
-            <div class="flex items-center gap-2">
+            <div class="problem-item flex items-center gap-2">
               <span>{{ problems[rowIndex * 2 + colIndex - 1].data.value }} 元 =</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>分</span>
