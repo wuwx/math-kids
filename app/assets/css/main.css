@@ -8,3 +8,27 @@
 
   --color-surface: #FAFAF8;
 }
+
+/* 打印卷面通用规则 */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 页头每页重复 */
+  thead {
+    display: table-header-group;
+  }
+
+  /* 防止题目被截断 */
+  .problem-row,
+  .problem-item {
+    page-break-inside: avoid;
+  }
+}
