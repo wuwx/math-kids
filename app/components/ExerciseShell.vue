@@ -50,7 +50,11 @@ function printPage() {
       <table class="w-full">
         <thead>
           <tr>
-            <th class="p-0 text-left">
+            <!-- colspan 取上限由浏览器裁剪到实际列数：各页面列数不同（2 或 3），写死会让表头只占第一列 -->
+            <th
+              colspan="1000"
+              class="p-0 text-left"
+            >
               <div class="flex justify-between items-center gap-4 flex-wrap pb-4 mb-4 border-b-2 border-slate-200 dark:border-slate-800 print:border-slate-400">
                 <div class="shrink-0 font-display text-xl font-semibold text-slate-800 dark:text-slate-100 whitespace-nowrap">
                   {{ title }}
