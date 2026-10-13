@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'exercise' })
+
 const count = ref(30)
 const minFactor = ref(2) // 最小因数，排除1
 const maxFactor = ref(19)
@@ -55,202 +57,119 @@ watch([count, minFactor, maxFactor, excludeSimple], () => {
 onMounted(() => {
   generate()
 })
-
-function printPage() {
-  window.print()
-}
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 dark:from-gray-900 dark:to-gray-800 py-6 px-4 print:bg-white print:min-h-0 print:p-0">
-    <!-- 控制面板 -->
-    <div class="max-w-4xl mx-auto mb-6 print:hidden">
-      <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
-        <!-- 顶部导航 -->
-        <div class="bg-purple-600 text-white px-6 py-4 flex items-center justify-between">
-          <NuxtLink
-            to="/"
-            class="flex items-center gap-2 hover:text-purple-200 transition"
-          >
-            <UIcon
-              name="i-lucide-chevron-left"
-              class="w-5 h-5"
-            />
-            <span>返回</span>
-          </NuxtLink>
-          <h1 class="text-xl font-bold">
-            ✖️ 19×19 乘法练习
-          </h1>
-          <UButton
-            icon="i-lucide-printer"
-            color="white"
-            variant="ghost"
-            @click="printPage"
-          >
-            打印
-          </UButton>
+  <ExerciseShell
+    title="19×19 乘法练习"
+    icon="i-lucide-grid-3x3"
+  >
+    <template #settings>
+      <!-- 说明 -->
+      <div class="mb-5 p-4 bg-primary-50 dark:bg-primary-500/10 rounded-xl">
+        <div class="text-sm text-primary-600 dark:text-primary-400">
+          练习 19×19 以内的乘法，默认排除两个因数都小于10的简单题目（如 3×5），专注练习较难的组合。
         </div>
+      </div>
 
-        <!-- 参数设置 -->
-        <div class="p-6">
-          <!-- 说明 -->
-          <div class="mb-5 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
-            <div class="text-sm text-purple-700 dark:text-purple-300">
-              💡 练习 19×19 以内的乘法，默认排除两个因数都小于10的简单题目（如 3×5），专注练习较难的组合。
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- 题目数量 -->
-            <div>
-              <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1.5">题目数量</label>
-              <UInput
-                v-model="count"
-                type="number"
-                :min="1"
-                :max="200"
-                class="text-center"
-              />
-            </div>
-            <!-- 最小因数 -->
-            <div>
-              <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1.5">最小因数</label>
-              <UInput
-                v-model="minFactor"
-                type="number"
-                :min="2"
-                :max="19"
-                class="text-center"
-              />
-            </div>
-            <!-- 最大因数 -->
-            <div>
-              <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1.5">最大因数</label>
-              <UInput
-                v-model="maxFactor"
-                type="number"
-                :min="2"
-                :max="19"
-                class="text-center"
-              />
-            </div>
-            <!-- 排除简单题 -->
-            <div>
-              <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1.5">难度设置</label>
-              <UButton
-                block
-                :color="excludeSimple ? 'primary' : 'neutral'"
-                :variant="excludeSimple ? 'solid' : 'outline'"
-                @click="excludeSimple = !excludeSimple"
-              >
-                {{ excludeSimple ? '已排除简单题' : '包含所有题目' }}
-              </UButton>
-            </div>
-          </div>
-
-          <!-- 重新生成按钮 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- 题目数量 -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">题目数量</label>
+          <UInput
+            v-model="count"
+            type="number"
+            :min="1"
+            :max="200"
+            class="text-center"
+          />
+        </div>
+        <!-- 最小因数 -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">最小因数</label>
+          <UInput
+            v-model="minFactor"
+            type="number"
+            :min="2"
+            :max="19"
+            class="text-center"
+          />
+        </div>
+        <!-- 最大因数 -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">最大因数</label>
+          <UInput
+            v-model="maxFactor"
+            type="number"
+            :min="2"
+            :max="19"
+            class="text-center"
+          />
+        </div>
+        <!-- 排除简单题 -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">难度设置</label>
           <UButton
             block
-            size="lg"
-            color="purple"
-            class="mt-5"
-            @click="generate"
+            :color="excludeSimple ? 'primary' : 'neutral'"
+            :variant="excludeSimple ? 'solid' : 'outline'"
+            @click="excludeSimple = !excludeSimple"
           >
-            🎲 重新生成
+            {{ excludeSimple ? '已排除简单题' : '包含所有题目' }}
           </UButton>
         </div>
       </div>
-    </div>
 
-    <!-- 题目区域 -->
-    <div class="print-area max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 print:shadow-none print:rounded-none print:p-0 print:max-w-none">
-      <!-- 页头 -->
-      <table class="w-full">
-        <thead>
-          <tr>
-            <th
-              colspan="3"
-              class="p-0 text-left"
-            >
-              <div class="flex justify-between items-center pb-4 mb-4 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-400">
-                <div class="text-xl font-bold text-gray-800 dark:text-gray-100">
-                  19×19 乘法练习
-                </div>
-                <div class="text-gray-600 dark:text-gray-300">
-                  日期：<span class="inline-block w-28 border-b border-gray-400" />
-                </div>
-                <div class="text-gray-600 dark:text-gray-300">
-                  姓名：<span class="inline-block w-24 border-b border-gray-400" />
-                </div>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="problems.length === 0">
-            <td
-              colspan="3"
-              class="text-center py-16"
-            >
-              <div class="text-6xl mb-4">
-                🤔
-              </div>
-              <div class="text-gray-500 dark:text-gray-400 text-lg">
-                没有生成题目
-              </div>
-            </td>
-          </tr>
-          <template v-else>
-            <tr
-              v-for="(_, rowIndex) in Math.ceil(problems.length / 3)"
-              :key="rowIndex"
-              class="problem-row"
-            >
-              <td
-                v-for="colIndex in 3"
-                :key="colIndex"
-                class="p-2 w-1/3 align-top"
-              >
-                <div
-                  v-if="problems[rowIndex * 3 + colIndex - 1]"
-                  class="problem-item flex items-center gap-2"
-                >
-                  <span class="text-lg font-mono tracking-wide text-gray-800 dark:text-gray-100">
-                    {{ problems[rowIndex * 3 + colIndex - 1].a }} × {{ problems[rowIndex * 3 + colIndex - 1].b }} =
-                  </span>
-                  <span class="flex-1 border-b border-dashed border-gray-300 dark:border-gray-600 ml-2" />
-                </div>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
-  </div>
+      <!-- 重新生成按钮 -->
+      <UButton
+        block
+        size="lg"
+        icon="i-lucide-dices"
+        class="mt-5"
+        @click="generate"
+      >
+        重新生成
+      </UButton>
+    </template>
+
+    <tr v-if="problems.length === 0">
+      <td
+        colspan="3"
+        class="text-center py-16"
+      >
+        <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+          <UIcon
+            name="i-lucide-circle-help"
+            class="w-7 h-7 text-slate-400"
+          />
+        </div>
+        <div class="text-slate-500 dark:text-slate-400 text-lg">
+          没有生成题目
+        </div>
+      </td>
+    </tr>
+    <template v-else>
+      <tr
+        v-for="(_, rowIndex) in Math.ceil(problems.length / 3)"
+        :key="rowIndex"
+        class="problem-row"
+      >
+        <td
+          v-for="colIndex in 3"
+          :key="colIndex"
+          class="p-2 w-1/3 align-top"
+        >
+          <div
+            v-if="problems[rowIndex * 3 + colIndex - 1]"
+            class="problem-item flex items-center gap-2"
+          >
+            <span class="text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100">
+              {{ problems[rowIndex * 3 + colIndex - 1].a }} × {{ problems[rowIndex * 3 + colIndex - 1].b }} =
+            </span>
+            <span class="flex-1 border-b border-dashed border-slate-300 dark:border-slate-600 ml-2" />
+          </div>
+        </td>
+      </tr>
+    </template>
+  </ExerciseShell>
 </template>
-
-<style>
-@media print {
-  @page {
-    size: A4;
-    margin: 10mm;
-  }
-
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  .problem-row {
-    page-break-inside: avoid;
-  }
-
-  .problem-item {
-    page-break-inside: avoid;
-  }
-}
-</style>

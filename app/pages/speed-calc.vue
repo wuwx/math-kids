@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'exercise' })
+
 const count = ref(50)
 const timeLimit = ref(180) // 秒
 const problems = ref<string[]>([])
@@ -100,103 +102,100 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 dark:from-gray-900 dark:to-gray-800 py-6 px-4">
-    <div class="max-w-2xl mx-auto">
-      <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
-        <div class="bg-red-500 text-white px-6 py-4 flex items-center justify-between">
-          <NuxtLink
-            to="/"
-            class="flex items-center gap-2 hover:text-red-200 transition"
-          >
-            <UIcon
-              name="i-lucide-chevron-left"
-              class="w-5 h-5"
-            />
-            <span>返回</span>
-          </NuxtLink>
-          <h1 class="text-xl font-bold">
-            ⚡ 限时口算
-          </h1>
-          <div class="w-16" />
+  <ExerciseShell
+    title="限时口算"
+    icon="i-lucide-zap"
+  >
+    <template #settings>
+      <div class="grid grid-cols-2 gap-4 max-w-xs">
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">题目数量</label>
+          <UInput
+            v-model="count"
+            type="number"
+            :min="10"
+            :max="100"
+            class="text-center"
+          />
         </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">时间(秒)</label>
+          <UInput
+            v-model="timeLimit"
+            type="number"
+            :min="60"
+            :max="600"
+            class="text-center"
+          />
+        </div>
+      </div>
+      <UButton
+        block
+        size="lg"
+        icon="i-lucide-zap"
+        class="mt-5"
+        :disabled="isRunning"
+        @click="start"
+      >
+        开始挑战
+      </UButton>
+    </template>
 
+    <tr>
+      <td class="p-0">
         <!-- 未开始 -->
         <div
           v-if="!isRunning && !isFinished"
-          class="p-8 text-center"
+          class="text-center py-8"
         >
-          <div class="text-6xl mb-6">
-            🏃‍♂️
+          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-primary-50 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+            <UIcon
+              name="i-lucide-zap"
+              class="w-7 h-7"
+            />
           </div>
-          <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+          <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
             限时口算挑战
           </h2>
-          <p class="text-gray-600 dark:text-gray-400 mb-6">
+          <p class="text-slate-600 dark:text-slate-400">
             在规定时间内完成尽可能多的口算题
           </p>
-
-          <div class="grid grid-cols-2 gap-4 mb-6 max-w-xs mx-auto">
-            <div>
-              <label class="block text-sm text-gray-500 mb-1">题目数量</label>
-              <UInput
-                v-model="count"
-                type="number"
-                :min="10"
-                :max="100"
-                class="text-center"
-              />
-            </div>
-            <div>
-              <label class="block text-sm text-gray-500 mb-1">时间(秒)</label>
-              <UInput
-                v-model="timeLimit"
-                type="number"
-                :min="60"
-                :max="600"
-                class="text-center"
-              />
-            </div>
-          </div>
-
-          <UButton
-            size="xl"
-            color="red"
-            @click="start"
-          >
-            🚀 开始挑战
-          </UButton>
         </div>
 
         <!-- 进行中 -->
         <div
           v-else-if="isRunning"
-          class="p-8"
+          class="py-2"
         >
           <div class="flex justify-between items-center mb-8">
             <div class="text-lg">
-              <span class="text-gray-500">进度：</span>
-              <span class="font-bold text-gray-800 dark:text-gray-100">{{ currentIndex + 1 }} / {{ problems.length }}</span>
+              <span class="text-slate-500">进度：</span>
+              <span class="font-bold text-slate-800 dark:text-slate-100">{{ currentIndex + 1 }} / {{ problems.length }}</span>
             </div>
             <div
-              class="text-2xl font-mono font-bold"
-              :class="timeLeft <= 30 ? 'text-red-500' : 'text-gray-800 dark:text-gray-100'"
+              class="flex items-center gap-2 text-2xl font-mono font-bold"
+              :class="timeLeft <= 30 ? 'text-red-500' : 'text-slate-800 dark:text-slate-100'"
             >
-              ⏱️ {{ formatTime(timeLeft) }}
+              <UIcon
+                name="i-lucide-timer"
+                class="w-6 h-6"
+              />
+              {{ formatTime(timeLeft) }}
             </div>
             <div class="text-lg">
-              <span class="text-gray-500">得分：</span>
+              <span class="text-slate-500">得分：</span>
               <span class="font-bold text-green-500">{{ score }}</span>
             </div>
           </div>
 
           <div class="text-center mb-8">
-            <div class="text-5xl font-mono font-bold text-gray-800 dark:text-gray-100 mb-6">
+            <div class="text-5xl font-mono font-bold text-slate-800 dark:text-slate-100 mb-6">
               {{ problems[currentIndex] }} = ?
             </div>
             <input
               v-model="userAnswer"
               type="number"
-              class="w-40 text-center text-3xl font-mono p-4 border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+              class="w-40 text-center text-3xl font-mono p-4 border-2 border-slate-300 rounded-xl focus:border-primary-500 focus:outline-none dark:bg-slate-800 dark:border-slate-600 dark:text-white"
               autofocus
               @keyup.enter="submitAnswer"
             >
@@ -205,7 +204,6 @@ onUnmounted(() => {
           <div class="flex justify-center gap-4">
             <UButton
               size="lg"
-              color="red"
               @click="submitAnswer"
             >
               确认 (Enter)
@@ -224,12 +222,15 @@ onUnmounted(() => {
         <!-- 结束 -->
         <div
           v-else-if="isFinished"
-          class="p-8 text-center"
+          class="text-center py-4"
         >
-          <div class="text-6xl mb-4">
-            🎉
+          <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-green-50 dark:bg-green-900/20 text-green-500 flex items-center justify-center">
+            <UIcon
+              name="i-lucide-party-popper"
+              class="w-7 h-7"
+            />
           </div>
-          <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+          <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">
             挑战完成！
           </h2>
 
@@ -238,7 +239,7 @@ onUnmounted(() => {
               <div class="text-3xl font-bold text-green-500">
                 {{ score }}
               </div>
-              <div class="text-sm text-gray-500">
+              <div class="text-sm text-slate-500">
                 正确
               </div>
             </div>
@@ -246,15 +247,15 @@ onUnmounted(() => {
               <div class="text-3xl font-bold text-red-500">
                 {{ wrongAnswers.length }}
               </div>
-              <div class="text-sm text-gray-500">
+              <div class="text-sm text-slate-500">
                 错误
               </div>
             </div>
-            <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
-              <div class="text-3xl font-bold text-blue-500">
+            <div class="bg-primary-50 dark:bg-primary-500/10 rounded-xl p-4">
+              <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">
                 {{ Math.round(score / currentIndex * 100) || 0 }}%
               </div>
-              <div class="text-sm text-gray-500">
+              <div class="text-sm text-slate-500">
                 正确率
               </div>
             </div>
@@ -264,10 +265,10 @@ onUnmounted(() => {
             v-if="wrongAnswers.length > 0"
             class="text-left mb-6"
           >
-            <h3 class="font-bold text-gray-700 dark:text-gray-300 mb-2">
+            <h3 class="font-bold text-slate-700 dark:text-slate-300 mb-2">
               错题回顾：
             </h3>
-            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 max-h-48 overflow-y-auto">
+            <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-4 max-h-48 overflow-y-auto">
               <div
                 v-for="(w, i) in wrongAnswers"
                 :key="i"
@@ -281,13 +282,13 @@ onUnmounted(() => {
 
           <UButton
             size="lg"
-            color="red"
+            icon="i-lucide-rotate-ccw"
             @click="start"
           >
-            🔄 再来一次
+            再来一次
           </UButton>
         </div>
-      </div>
-    </div>
-  </div>
+      </td>
+    </tr>
+  </ExerciseShell>
 </template>
