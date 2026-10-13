@@ -54,7 +54,7 @@ function rand(min: number, max: number) {
 function generate() {
   const result: { question: string, answer: number }[] = []
   for (let i = 0; i < count.value; i++) {
-    const template = templates[Math.floor(Math.random() * templates.length)]
+    const template = templates[Math.floor(Math.random() * templates.length)]!
     const { q, a } = template.gen()
     result.push({ question: q, answer: a })
   }

@@ -101,7 +101,7 @@ onMounted(() => generate())
           class="problem-item flex items-center gap-2"
         >
           <span class="text-lg font-mono tracking-wide text-slate-800 dark:text-slate-100">
-            {{ problems[rowIndex * 3 + colIndex - 1].dividend }} ÷ {{ problems[rowIndex * 3 + colIndex - 1].divisor }} =
+            {{ problems[rowIndex * 3 + colIndex - 1]!.dividend }} ÷ {{ problems[rowIndex * 3 + colIndex - 1]!.divisor }} =
           </span>
           <span class="flex-1 border-b border-dashed border-slate-300 dark:border-slate-600" />
         </div>

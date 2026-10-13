@@ -31,7 +31,7 @@ function generate() {
   const result: { a: number, b: number, c: number, d: number, op: string }[] = []
 
   for (let i = 0; i < count.value; i++) {
-    const op = operators.value[Math.floor(Math.random() * operators.value.length)]
+    const op = operators.value[Math.floor(Math.random() * operators.value.length)]!
 
     // 生成同分母或可通分的分数
     const denominator = Math.floor(Math.random() * (maxDenominator.value - 2)) + 2
@@ -135,13 +135,13 @@ onMounted(() => generate())
           class="problem-item flex items-center gap-2 text-slate-800 dark:text-slate-100"
         >
           <div class="inline-flex flex-col items-center">
-            <span class="border-b border-slate-800 dark:border-slate-100 px-1">{{ problems[rowIndex * 3 + colIndex - 1].a }}</span>
-            <span class="px-1">{{ problems[rowIndex * 3 + colIndex - 1].b }}</span>
+            <span class="border-b border-slate-800 dark:border-slate-100 px-1">{{ problems[rowIndex * 3 + colIndex - 1]!.a }}</span>
+            <span class="px-1">{{ problems[rowIndex * 3 + colIndex - 1]!.b }}</span>
           </div>
-          <span class="text-lg">{{ problems[rowIndex * 3 + colIndex - 1].op }}</span>
+          <span class="text-lg">{{ problems[rowIndex * 3 + colIndex - 1]!.op }}</span>
           <div class="inline-flex flex-col items-center">
-            <span class="border-b border-slate-800 dark:border-slate-100 px-1">{{ problems[rowIndex * 3 + colIndex - 1].c }}</span>
-            <span class="px-1">{{ problems[rowIndex * 3 + colIndex - 1].d }}</span>
+            <span class="border-b border-slate-800 dark:border-slate-100 px-1">{{ problems[rowIndex * 3 + colIndex - 1]!.c }}</span>
+            <span class="px-1">{{ problems[rowIndex * 3 + colIndex - 1]!.d }}</span>
           </div>
           <span class="text-lg">=</span>
           <span class="flex-1 border-b border-dashed border-slate-300 dark:border-slate-600" />

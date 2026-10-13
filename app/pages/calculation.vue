@@ -63,10 +63,12 @@ function generate() {
   problems.value = result
 }
 
-// 监听参数变化自动重新生成
+// 监听参数变化自动重新生成（防抖）
+let regenerateTimer: ReturnType<typeof setTimeout> | null = null
 watch([count, minNumber, maxNumber], () => {
-  generate()
-}, { debounce: 500 } as WatchOptions)
+  if (regenerateTimer) clearTimeout(regenerateTimer)
+  regenerateTimer = setTimeout(generate, 500)
+})
 
 // 初始化
 onMounted(() => {

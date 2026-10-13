@@ -18,7 +18,10 @@ function generateSudoku4x4(): { puzzle: (number | null)[][], solution: number[][
   for (let i = 0; i < 10; i++) {
     const r1 = Math.floor(Math.random() * 2)
     if (Math.random() > 0.5) {
-      [sol[r1], sol[r1 + (Math.random() > 0.5 ? 0 : 1)]] = [sol[r1 + (Math.random() > 0.5 ? 0 : 1)], sol[r1]]
+      const r2 = r1 + (Math.random() > 0.5 ? 0 : 1)
+      const tmp = sol[r1]!
+      sol[r1] = sol[r2]!
+      sol[r2] = tmp
     }
   }
 
@@ -30,8 +33,8 @@ function generateSudoku4x4(): { puzzle: (number | null)[][], solution: number[][
   while (removed < removeCount) {
     const r = Math.floor(Math.random() * 4)
     const c = Math.floor(Math.random() * 4)
-    if (puzzle[r][c] !== null) {
-      puzzle[r][c] = null
+    if (puzzle[r]![c] !== null) {
+      puzzle[r]![c] = null
       removed++
     }
   }

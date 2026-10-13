@@ -78,7 +78,7 @@ onMounted(() => generate())
           v-if="problems[rowIndex * 3 + colIndex - 1]"
           class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-slate-100"
         >
-          {{ problems[rowIndex * 3 + colIndex - 1].expression }}
+          {{ problems[rowIndex * 3 + colIndex - 1]!.expression }}
         </div>
       </td>
     </tr>

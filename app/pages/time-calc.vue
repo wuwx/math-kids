@@ -81,8 +81,8 @@ onMounted(() => generate())
           class="text-slate-800 dark:text-slate-100"
         >
           <div class="problem-item text-base mb-2">
-            从 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1].startH, problems[rowIndex * 2 + colIndex - 1].startM) }}</span>
-            到 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1].endH, problems[rowIndex * 2 + colIndex - 1].endM) }}</span>
+            从 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1]!.startH, problems[rowIndex * 2 + colIndex - 1]!.startM) }}</span>
+            到 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1]!.endH, problems[rowIndex * 2 + colIndex - 1]!.endM) }}</span>
           </div>
           <div class="flex items-center gap-2">
             <span>经过了</span>

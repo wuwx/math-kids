@@ -47,8 +47,8 @@ function generate() {
         const a = Math.floor(Math.random() * 5) + 1
         const b = Math.floor(Math.random() * 5) + 1
         seq = [a, b]
-        for (let j = 2; j < 5; j++) seq.push(seq[j - 1] + seq[j - 2])
-        answer = seq[3] + seq[4]
+        for (let j = 2; j < 5; j++) seq.push(seq[j - 1]! + seq[j - 2]!)
+        answer = seq[3]! + seq[4]!
         break
       }
     }
@@ -56,7 +56,7 @@ function generate() {
     // 随机选择一个位置作为答案
     const blankPos = Math.floor(Math.random() * 3) + 3 // 后三个位置
     const displaySeq: (number | string)[] = [...seq]
-    answer = seq[blankPos]
+    answer = seq[blankPos]!
     displaySeq[blankPos] = '___'
 
     result.push({ sequence: displaySeq, answer })

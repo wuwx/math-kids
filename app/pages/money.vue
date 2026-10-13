@@ -19,7 +19,7 @@ function generate() {
       result.push({ type: 'change', data: { price: price.toFixed(1), paid } })
     } else {
       const types = ['yuan2jiao', 'jiao2fen', 'yuan2fen']
-      const t = types[Math.floor(Math.random() * types.length)]
+      const t = types[Math.floor(Math.random() * types.length)]!
       const value = Math.floor(Math.random() * 50) + 1
       result.push({ type: t, data: { value } })
     }
@@ -101,33 +101,33 @@ onMounted(() => generate())
           v-if="problems[rowIndex * 2 + colIndex - 1]"
           class="text-slate-800 dark:text-slate-100"
         >
-          <template v-if="problems[rowIndex * 2 + colIndex - 1].type === 'change'">
+          <template v-if="problems[rowIndex * 2 + colIndex - 1]!.type === 'change'">
             <div class="problem-item mb-1">
-              商品 <span class="font-bold">{{ problems[rowIndex * 2 + colIndex - 1].data.price }}</span> 元
+              商品 <span class="font-bold">{{ problems[rowIndex * 2 + colIndex - 1]!.data.price }}</span> 元
             </div>
             <div class="flex items-center gap-2">
-              <span>付 {{ problems[rowIndex * 2 + colIndex - 1].data.paid }} 元，找回</span>
+              <span>付 {{ problems[rowIndex * 2 + colIndex - 1]!.data.paid }} 元，找回</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>元</span>
             </div>
           </template>
-          <template v-else-if="problems[rowIndex * 2 + colIndex - 1].type === 'yuan2jiao'">
+          <template v-else-if="problems[rowIndex * 2 + colIndex - 1]!.type === 'yuan2jiao'">
             <div class="problem-item flex items-center gap-2">
-              <span>{{ problems[rowIndex * 2 + colIndex - 1].data.value }} 元 =</span>
+              <span>{{ problems[rowIndex * 2 + colIndex - 1]!.data.value }} 元 =</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>角</span>
             </div>
           </template>
-          <template v-else-if="problems[rowIndex * 2 + colIndex - 1].type === 'jiao2fen'">
+          <template v-else-if="problems[rowIndex * 2 + colIndex - 1]!.type === 'jiao2fen'">
             <div class="problem-item flex items-center gap-2">
-              <span>{{ problems[rowIndex * 2 + colIndex - 1].data.value }} 角 =</span>
+              <span>{{ problems[rowIndex * 2 + colIndex - 1]!.data.value }} 角 =</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>分</span>
             </div>
           </template>
-          <template v-else-if="problems[rowIndex * 2 + colIndex - 1].type === 'yuan2fen'">
+          <template v-else-if="problems[rowIndex * 2 + colIndex - 1]!.type === 'yuan2fen'">
             <div class="problem-item flex items-center gap-2">
-              <span>{{ problems[rowIndex * 2 + colIndex - 1].data.value }} 元 =</span>
+              <span>{{ problems[rowIndex * 2 + colIndex - 1]!.data.value }} 元 =</span>
               <span class="inline-block w-16 border-b border-dashed border-slate-400" />
               <span>分</span>
             </div>

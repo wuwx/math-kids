@@ -63,14 +63,14 @@ function start() {
 function submitAnswer() {
   if (!userAnswer.value) return
 
-  const correct = getAnswer(problems.value[currentIndex.value])
+  const correct = getAnswer(problems.value[currentIndex.value]!)
   const userNum = parseInt(userAnswer.value)
 
   if (userNum === correct) {
     score.value++
   } else {
     wrongAnswers.value.push({
-      problem: problems.value[currentIndex.value],
+      problem: problems.value[currentIndex.value]!,
       userAnswer: userAnswer.value,
       correct
     })

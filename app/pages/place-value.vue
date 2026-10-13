@@ -18,7 +18,7 @@ function generate() {
       case 0: { // 某位上是几
         const pos = Math.floor(Math.random() * 4)
         question = `${num} 的${places[pos]}位上是___`
-        answer = parseInt(digits[pos])
+        answer = parseInt(digits[pos]!)
         break
       }
       case 1: { // 某数字在什么位
@@ -30,16 +30,16 @@ function generate() {
       }
       case 2: { // 某位表示多少
         const pos = Math.floor(Math.random() * 3) + 1
-        const digit = parseInt(digits[pos])
+        const digit = parseInt(digits[pos]!)
         question = `${num} 的${places[pos]}位上的 ${digit} 表示___`
         answer = digit * Math.pow(10, pos)
         break
       }
       default: { // 组成
-        const thousands = parseInt(digits[3])
-        const hundreds = parseInt(digits[2])
-        const tens = parseInt(digits[1])
-        const ones = parseInt(digits[0])
+        const thousands = parseInt(digits[3]!)
+        const hundreds = parseInt(digits[2]!)
+        const tens = parseInt(digits[1]!)
+        const ones = parseInt(digits[0]!)
         question = `${thousands}个千 + ${hundreds}个百 + ${tens}个十 + ${ones}个一 = ___`
         answer = num
       }
@@ -100,7 +100,7 @@ onMounted(() => generate())
           v-if="problems[rowIndex * 2 + colIndex - 1]"
           class="problem-item text-base text-slate-800 dark:text-slate-100"
         >
-          {{ problems[rowIndex * 2 + colIndex - 1].question }}
+          {{ problems[rowIndex * 2 + colIndex - 1]!.question }}
         </div>
       </td>
     </tr>

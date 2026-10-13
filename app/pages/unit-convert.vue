@@ -29,7 +29,7 @@ function generate() {
       : [...lengthUnits, ...weightUnits]
 
   for (let i = 0; i < count.value; i++) {
-    const unit = units[Math.floor(Math.random() * units.length)]
+    const unit = units[Math.floor(Math.random() * units.length)]!
     const value = Math.floor(Math.random() * 99) + 1
     result.push({ from: unit.from, to: unit.to, value })
   }
@@ -119,10 +119,10 @@ onMounted(() => generate())
           v-if="problems[rowIndex * 3 + colIndex - 1]"
           class="problem-item flex items-center gap-1 text-slate-800 dark:text-slate-100"
         >
-          <span class="font-mono">{{ problems[rowIndex * 3 + colIndex - 1].value }}</span>
-          <span>{{ problems[rowIndex * 3 + colIndex - 1].from }} =</span>
+          <span class="font-mono">{{ problems[rowIndex * 3 + colIndex - 1]!.value }}</span>
+          <span>{{ problems[rowIndex * 3 + colIndex - 1]!.from }} =</span>
           <span class="inline-block w-16 border-b border-dashed border-slate-400" />
-          <span>{{ problems[rowIndex * 3 + colIndex - 1].to }}</span>
+          <span>{{ problems[rowIndex * 3 + colIndex - 1]!.to }}</span>
         </div>
       </td>
     </tr>

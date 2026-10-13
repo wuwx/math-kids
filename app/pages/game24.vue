@@ -6,13 +6,13 @@ const problems = ref<{ numbers: number[], hasSolution: boolean }[]>([])
 
 // 检查四个数能否算出24
 function canMake24(nums: number[]): boolean {
-  if (nums.length === 1) return Math.abs(nums[0] - 24) < 0.0001
+  if (nums.length === 1) return Math.abs(nums[0]! - 24) < 0.0001
 
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < nums.length; j++) {
       if (i === j) continue
       const remaining = nums.filter((_, k) => k !== i && k !== j)
-      const a = nums[i], b = nums[j]
+      const a = nums[i]!, b = nums[j]!
 
       for (const result of [a + b, a - b, a * b, b !== 0 ? a / b : NaN]) {
         if (!isNaN(result) && canMake24([...remaining, result])) return true
