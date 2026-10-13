@@ -87,7 +87,7 @@ onMounted(() => generate())
             从 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1]!.startH, problems[rowIndex * 2 + colIndex - 1]!.startM) }}</span>
             到 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1]!.endH, problems[rowIndex * 2 + colIndex - 1]!.endM) }}</span>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2">
             <span>经过了</span>
             <span class="inline-block w-12 border-b border-dashed border-slate-400" />
             <span>小时</span>

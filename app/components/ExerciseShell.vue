@@ -59,7 +59,7 @@ function printPage() {
                 <div class="shrink-0 font-display text-xl font-semibold text-slate-800 dark:text-slate-100 whitespace-nowrap">
                   {{ title }}
                 </div>
-                <div class="flex items-center gap-6 text-slate-600 dark:text-slate-300 whitespace-nowrap">
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-slate-600 dark:text-slate-300 whitespace-nowrap">
                   <span>日期：<span class="inline-block w-24 border-b border-slate-400" /></span>
                   <span>姓名：<span class="inline-block w-20 border-b border-slate-400" /></span>
                   <span class="flex items-center gap-2">评分：<span class="inline-block w-14 h-7 border border-slate-400 rounded-sm" /></span>

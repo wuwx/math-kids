@@ -109,7 +109,7 @@ onMounted(() => generate())
       >
         <div
           v-if="problems[rowIndex * 2 + colIndex - 1]"
-          class="problem-item flex items-center gap-2 text-lg font-mono text-slate-800 dark:text-slate-100"
+          class="problem-item flex flex-wrap items-center gap-2 text-lg font-mono text-slate-800 dark:text-slate-100"
         >
           <span>{{ problems[rowIndex * 2 + colIndex - 1]!.left }}</span>
           <span class="w-8 h-8 rounded-full border-2 border-slate-400 flex items-center justify-center text-sm">○</span>

@@ -137,7 +137,7 @@ onMounted(() => generate())
       >
         <div
           v-if="problems[rowIndex * 3 + colIndex - 1]"
-          class="problem-item flex items-center gap-2 text-slate-800 dark:text-slate-100"
+          class="problem-item flex flex-wrap items-center gap-2 text-slate-800 dark:text-slate-100"
         >
           <div class="inline-flex flex-col items-center">
             <span class="border-b border-slate-800 dark:border-slate-100 px-1">{{ problems[rowIndex * 3 + colIndex - 1]!.a }}</span>
