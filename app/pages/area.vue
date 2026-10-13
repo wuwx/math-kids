@@ -80,7 +80,7 @@ onMounted(() => generate())
       class="problem-row"
     >
       <td class="p-3 align-top">
-        <div class="problem-item text-lg text-slate-800 dark:text-gray-100">
+        <div class="problem-item text-lg text-slate-800 dark:text-slate-100">
           {{ problem.question }}
         </div>
       </td>

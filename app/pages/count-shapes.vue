@@ -65,7 +65,7 @@ onMounted(() => generate())
             :key="idx"
             class="border border-slate-200 dark:border-slate-700 rounded-xl p-6"
           >
-            <div class="problem-item text-base text-slate-800 dark:text-gray-100 mb-4">
+            <div class="problem-item text-base text-slate-800 dark:text-slate-100 mb-4">
               数一数下图中有多少个{{ problem.type }}？
             </div>
 
@@ -82,7 +82,7 @@ onMounted(() => generate())
               </div>
             </div>
 
-            <div class="text-center text-slate-800 dark:text-gray-100">
+            <div class="text-center text-slate-800 dark:text-slate-100">
               答：___ 个
             </div>
           </div>

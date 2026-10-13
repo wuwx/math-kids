@@ -83,7 +83,7 @@ onMounted(() => generate())
     >
       <td class="p-2 w-1/2 align-top">
         <template v-if="problems[rowIndex * 2]">
-          <div class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100 tabular-nums">
+          <div class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-slate-100 tabular-nums">
             {{ problems[rowIndex * 2] }}
           </div>
           <div class="mt-2 border border-dashed border-slate-300 dark:border-slate-600 rounded h-20" />
@@ -91,7 +91,7 @@ onMounted(() => generate())
       </td>
       <td class="p-2 w-1/2 align-top">
         <template v-if="problems[rowIndex * 2 + 1]">
-          <div class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100 tabular-nums">
+          <div class="problem-item text-lg font-mono tracking-wide text-slate-800 dark:text-slate-100 tabular-nums">
             {{ problems[rowIndex * 2 + 1] }}
           </div>
           <div class="mt-2 border border-dashed border-slate-300 dark:border-slate-600 rounded h-20" />

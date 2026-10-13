@@ -78,7 +78,7 @@ onMounted(() => generate())
       >
         <div
           v-if="problems[rowIndex * 2 + colIndex - 1]"
-          class="text-slate-800 dark:text-gray-100"
+          class="text-slate-800 dark:text-slate-100"
         >
           <div class="problem-item text-base mb-2">
             从 <span class="font-mono font-bold">{{ formatTime(problems[rowIndex * 2 + colIndex - 1].startH, problems[rowIndex * 2 + colIndex - 1].startM) }}</span>

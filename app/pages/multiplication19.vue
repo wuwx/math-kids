@@ -163,7 +163,7 @@ onMounted(() => {
             v-if="problems[rowIndex * 3 + colIndex - 1]"
             class="problem-item flex items-center gap-2"
           >
-            <span class="text-lg font-mono tracking-wide text-slate-800 dark:text-gray-100">
+            <span class="text-lg font-mono tracking-wide text-slate-800 dark:text-slate-100">
               {{ problems[rowIndex * 3 + colIndex - 1].a }} × {{ problems[rowIndex * 3 + colIndex - 1].b }} =
             </span>
             <span class="flex-1 border-b border-dashed border-slate-300 dark:border-slate-600 ml-2" />

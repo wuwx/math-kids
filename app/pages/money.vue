@@ -99,7 +99,7 @@ onMounted(() => generate())
       >
         <div
           v-if="problems[rowIndex * 2 + colIndex - 1]"
-          class="text-slate-800 dark:text-gray-100"
+          class="text-slate-800 dark:text-slate-100"
         >
           <template v-if="problems[rowIndex * 2 + colIndex - 1].type === 'change'">
             <div class="problem-item mb-1">
