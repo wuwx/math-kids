@@ -8,7 +8,10 @@ const problems = ref<string[]>([])
 function generate() {
   const result: string[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 3)
 
     for (let j = 0; j < 100; j++) {

@@ -7,7 +7,10 @@ const problems = ref<string[]>([])
 
 function generate() {
   const result: string[] = []
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const isAdd = Math.random() > 0.5
 
     for (let j = 0; j < 100; j++) {
@@ -15,7 +18,8 @@ function generate() {
         // 进位加法：个位相加 >= 10
         const a = Math.floor(Math.random() * 900) + 100
         const aUnit = a % 10
-        if (aUnit >= 9) continue
+        // aUnit 为 0 时无法构造个位进位（bUnit 会算出 10，使 b 个位回到 0）
+        if (aUnit === 0 || aUnit >= 9) continue
         const bUnit = 10 - aUnit + Math.floor(Math.random() * aUnit)
         const b = Math.floor(Math.random() * 90) * 10 + 10 + bUnit
         if (b >= 100 && b <= 999) {

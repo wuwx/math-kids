@@ -25,7 +25,10 @@ function generate() {
   }
 
   const result: string[] = []
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const op = operators.value[Math.floor(Math.random() * operators.value.length)]
 
     if (op === '×') {

@@ -7,38 +7,41 @@ const problems = ref<{ question: string, answer: number }[]>([])
 function generate() {
   const result: { question: string, answer: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 4)
     let question: string, answer: number
 
     switch (type) {
       case 0: { // 两端都种，求棵数
-        const length = (Math.floor(Math.random() * 20) + 5) * 5
-        const interval = Math.floor(Math.random() * 4) + 2
+        const interval = Math.floor(Math.random() * 4) + 2 // 2-5 米
+        const length = interval * (Math.floor(Math.random() * 16) + 5) // 先定间隔再取整数倍，保证能整除
         const trees = length / interval + 1
         question = `一条 ${length} 米的路，每隔 ${interval} 米种一棵树，两端都种，共种多少棵？`
         answer = trees
         break
       }
       case 1: { // 两端都不种，求棵数
-        const length = (Math.floor(Math.random() * 20) + 5) * 5
         const interval = Math.floor(Math.random() * 4) + 2
+        const length = interval * (Math.floor(Math.random() * 16) + 5)
         const trees = length / interval - 1
         question = `一条 ${length} 米的路，每隔 ${interval} 米种一棵树，两端都不种，共种多少棵？`
         answer = trees
         break
       }
       case 2: { // 一端种一端不种
-        const length = (Math.floor(Math.random() * 20) + 5) * 5
         const interval = Math.floor(Math.random() * 4) + 2
+        const length = interval * (Math.floor(Math.random() * 16) + 5)
         const trees = length / interval
         question = `一条 ${length} 米的路，每隔 ${interval} 米种一棵树，只在一端种，共种多少棵？`
         answer = trees
         break
       }
       default: { // 环形
-        const length = (Math.floor(Math.random() * 15) + 5) * 6
         const interval = Math.floor(Math.random() * 3) + 2
+        const length = interval * (Math.floor(Math.random() * 16) + 5)
         const trees = length / interval
         question = `一个周长 ${length} 米的圆形花坛，每隔 ${interval} 米种一棵树，共种多少棵？`
         answer = trees

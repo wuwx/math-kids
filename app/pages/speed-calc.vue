@@ -38,11 +38,21 @@ function generateProblems() {
 }
 
 function getAnswer(problem: string): number {
-  const cleaned = problem.replace('×', '*').replace('−', '-')
-  return eval(cleaned)
+  const parts = problem.split(' ')
+  const a = Number(parts[0])
+  const b = Number(parts[2])
+  if (parts[1] === '+') return a + b
+  if (parts[1] === '-') return a - b
+  return a * b
 }
 
 function start() {
+  // UInput 可能返回字符串（如清空后为 ''），无效时回退默认值，避免 0 题/0 秒导致异常
+  const nCount = Math.floor(Number(count.value)) || 50
+  const nTime = Math.floor(Number(timeLimit.value)) || 180
+  count.value = Math.max(1, nCount)
+  timeLimit.value = Math.max(1, nTime)
+
   generateProblems()
   currentIndex.value = 0
   score.value = 0
@@ -61,6 +71,7 @@ function start() {
 }
 
 function submitAnswer() {
+  if (!isRunning.value || currentIndex.value >= problems.value.length) return
   if (!userAnswer.value) return
 
   const correct = getAnswer(problems.value[currentIndex.value]!)
@@ -253,7 +264,7 @@ onUnmounted(() => {
             </div>
             <div class="bg-primary-50 dark:bg-primary-500/10 rounded-xl p-4">
               <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                {{ Math.round(score / currentIndex * 100) || 0 }}%
+                {{ currentIndex > 0 ? Math.round(score / currentIndex * 100) : 0 }}%
               </div>
               <div class="text-sm text-slate-500">
                 正确率

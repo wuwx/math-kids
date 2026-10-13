@@ -7,12 +7,15 @@ const problems = ref<{ startH: number, startM: number, endH: number, endM: numbe
 function generate() {
   const result: { startH: number, startM: number, endH: number, endM: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const startH = Math.floor(Math.random() * 12) + 1
     const startM = Math.floor(Math.random() * 60)
 
     // 随机增加 10 分钟到 3 小时
-    const addMinutes = Math.floor(Math.random() * 170) + 10
+    const addMinutes = Math.floor(Math.random() * 171) + 10
     let endM = startM + addMinutes
     let endH = startH + Math.floor(endM / 60)
     endM = endM % 60

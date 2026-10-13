@@ -4,18 +4,22 @@ definePageMeta({ layout: 'exercise' })
 const problems = ref<{ equation: string, hint: string, answer: string }[]>([])
 
 const puzzles = [
-  { equation: '6 + 4 = 4', hint: '移动1根', answer: '0 + 4 = 4' },
-  { equation: '8 - 3 = 2', hint: '移动1根', answer: '9 - 3 = 6 或 8 - 2 = 6' },
-  { equation: '1 + 1 = 3', hint: '移动1根', answer: '1 + 1 ≠ 3 或 7 - 1 = 6' },
-  { equation: '5 + 5 = 5', hint: '移动1根', answer: '5 + 0 = 5' },
-  { equation: '3 + 3 = 8', hint: '移动1根', answer: '3 + 5 = 8' },
-  { equation: '6 - 6 = 6', hint: '移动1根', answer: '6 - 0 = 6 或 8 - 6 = 2' },
-  { equation: '9 - 1 = 6', hint: '移动1根', answer: '9 - 3 = 6' },
-  { equation: '1 = 7 - 1', hint: '移动1根', answer: '1 = 7 - 6' }
+  { equation: '6 + 4 = 4', hint: '移动1根', answer: '0 + 4 = 4' }, // 6 的中段移到右上 → 0
+  { equation: '3 + 3 = 8', hint: '移动1根', answer: '3 + 5 = 8' }, // 后一个 3 的右上竖段移到左上 → 5
+  { equation: '1 + 1 = 3', hint: '移动1根', answer: '1 + 1 = 2' }, // 3 的右下竖段移到左下 → 2
+  { equation: '6 - 6 = 6', hint: '移动1根', answer: '6 - 0 = 6' }, // 后一个 6 的中段移到右上 → 0
+  { equation: '6 + 3 = 8', hint: '移动1根', answer: '6 + 2 = 8' }, // 3 的右下竖段移到左下 → 2
+  { equation: '4 + 3 = 9', hint: '移动1根', answer: '4 + 5 = 9' }, // 3 的右上竖段移到左上 → 5
+  { equation: '5 - 3 = 3', hint: '移动1根', answer: '5 - 2 = 3' }, // 结果 3 的右下竖段移到左下 → 2
+  { equation: '6 + 2 = 9', hint: '移动1根', answer: '5 + 2 = 8' } // 6 的左下竖段移到 9 的左下 → 5 和 8
 ]
 
 function generate() {
-  const shuffled = [...puzzles].sort(() => Math.random() - 0.5)
+  const shuffled = [...puzzles]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i]!, shuffled[j]!] = [shuffled[j]!, shuffled[i]!]
+  }
   problems.value = shuffled.slice(0, 6)
 }
 

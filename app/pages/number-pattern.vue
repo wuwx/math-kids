@@ -7,7 +7,10 @@ const problems = ref<{ sequence: (number | string)[], answer: number }[]>([])
 function generate() {
   const result: { sequence: (number | string)[], answer: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 5)
     let seq: number[] = []
     let answer = 0
@@ -53,8 +56,8 @@ function generate() {
       }
     }
 
-    // 随机选择一个位置作为答案
-    const blankPos = Math.floor(Math.random() * 3) + 3 // 后三个位置
+    // 随机选择一个位置作为答案（索引 2-4，避免越界覆盖 switch 中算出的正确答案）
+    const blankPos = Math.floor(Math.random() * 3) + 2
     const displaySeq: (number | string)[] = [...seq]
     answer = seq[blankPos]!
     displaySeq[blankPos] = '___'

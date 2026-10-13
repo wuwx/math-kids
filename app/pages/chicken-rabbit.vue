@@ -7,7 +7,10 @@ const problems = ref<{ question: string, chicken: number, rabbit: number }[]>([]
 function generate() {
   const result: { question: string, chicken: number, rabbit: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const chicken = Math.floor(Math.random() * 15) + 5
     const rabbit = Math.floor(Math.random() * 15) + 5
     const heads = chicken + rabbit

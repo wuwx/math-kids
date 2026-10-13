@@ -23,7 +23,7 @@ const categories: Category[] = [
       { name: '进位借位练习', description: '带进位的加法和借位的减法', route: '/calculation1', icon: 'i-lucide-calculator' },
       { name: '乘除法练习', description: '两位数乘除一位数', route: '/calculation2', icon: 'i-lucide-x' },
       { name: '三数连算', description: '三个三位数的连续加减运算', route: '/calculation3', icon: 'i-lucide-sigma' },
-      { name: '三数连算 II', description: '三个三位数的连续加减运算', route: '/calculation4', icon: 'i-lucide-repeat' },
+      { name: '三数连算 II', description: '带括号的三个三位数运算', route: '/calculation4', icon: 'i-lucide-repeat' },
       { name: '综合练习', description: '加减乘混合运算', route: '/calculation5', icon: 'i-lucide-target' },
       { name: '19×19 乘法', description: '19以内乘法练习，排除简单一位数乘法', route: '/multiplication19', icon: 'i-lucide-grid-3x3' },
       { name: '带余数除法', description: '练习有余数的除法运算', route: '/division-remainder', icon: 'i-lucide-divide' },

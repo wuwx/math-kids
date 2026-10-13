@@ -25,7 +25,10 @@ function canMake24(nums: number[]): boolean {
 function generate() {
   const result: { numbers: number[], hasSolution: boolean }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     let nums: number[]
     let attempts = 0
 

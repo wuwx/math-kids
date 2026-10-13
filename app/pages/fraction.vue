@@ -28,13 +28,18 @@ function generate() {
     return
   }
 
+  // UInput 可能返回字符串，无效时保留上一次的题目
+  const n = toCount(count.value)
+  const maxD = Number(maxDenominator.value)
+  if (!n || !Number.isFinite(maxD) || maxD < 2) return
+
   const result: { a: number, b: number, c: number, d: number, op: string }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  for (let i = 0; i < n; i++) {
     const op = operators.value[Math.floor(Math.random() * operators.value.length)]!
 
-    // 生成同分母或可通分的分数
-    const denominator = Math.floor(Math.random() * (maxDenominator.value - 2)) + 2
+    // 生成同分母或可通分的分数（分母范围 2 到最大分母，含最大值）
+    const denominator = Math.floor(Math.random() * (maxD - 1)) + 2
     let a = Math.floor(Math.random() * (denominator - 1)) + 1
     let c = Math.floor(Math.random() * (denominator - 1)) + 1
 

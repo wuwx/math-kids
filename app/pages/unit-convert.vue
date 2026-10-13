@@ -28,7 +28,10 @@ function generate() {
       ? weightUnits
       : [...lengthUnits, ...weightUnits]
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const unit = units[Math.floor(Math.random() * units.length)]!
     const value = Math.floor(Math.random() * 99) + 1
     result.push({ from: unit.from, to: unit.to, value })

@@ -13,17 +13,25 @@ function isSimple(a: number, b: number): boolean {
 }
 
 function generate() {
+  // UInput 可能返回字符串，无效时保留上一次的题目
+  const n = toCount(count.value)
+  const min = Number(minFactor.value)
+  const max = Number(maxFactor.value)
+  if (!n || !Number.isFinite(min) || !Number.isFinite(max)) return
+  const lo = Math.max(2, Math.floor(Math.min(min, max)))
+  const hi = Math.max(2, Math.floor(Math.max(min, max)))
+
   const result: { a: number, b: number }[] = []
   const used = new Set<string>()
 
   let attempts = 0
-  const maxAttempts = count.value * 100
+  const maxAttempts = n * 100
 
-  while (result.length < count.value && attempts < maxAttempts) {
+  while (result.length < n && attempts < maxAttempts) {
     attempts++
 
-    const a = Math.floor(Math.random() * (maxFactor.value - minFactor.value + 1)) + minFactor.value
-    const b = Math.floor(Math.random() * (maxFactor.value - minFactor.value + 1)) + minFactor.value
+    const a = Math.floor(Math.random() * (hi - lo + 1)) + lo
+    const b = Math.floor(Math.random() * (hi - lo + 1)) + lo
 
     // 排除简单的一位数乘法
     if (excludeSimple.value && isSimple(a, b)) {
@@ -43,6 +51,14 @@ function generate() {
     } else {
       result.push({ a: b, b: a })
     }
+  }
+
+  // 去重后可用组合不足时，放宽去重限制补足题目数量
+  for (let i = 0; i < n * 100 && result.length < n; i++) {
+    const a = Math.floor(Math.random() * (hi - lo + 1)) + lo
+    const b = Math.floor(Math.random() * (hi - lo + 1)) + lo
+    if (excludeSimple.value && isSimple(a, b)) continue
+    result.push(Math.random() > 0.5 ? { a, b } : { a: b, b: a })
   }
 
   problems.value = result
@@ -144,7 +160,7 @@ onMounted(() => {
           />
         </div>
         <div class="text-slate-500 dark:text-slate-400 text-lg">
-          没有生成题目
+          没有生成题目，请调整设置（如扩大因数范围或包含简单题）
         </div>
       </td>
     </tr>

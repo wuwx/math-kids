@@ -10,12 +10,17 @@ interface MoneyProblem {
 const problems = ref<MoneyProblem[]>([])
 
 function generate() {
+  const n = toCount(count.value)
+  if (!n) return
+
   const result: MoneyProblem[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  for (let i = 0; i < n; i++) {
     if (mode.value === 'change') {
       const price = Math.floor(Math.random() * 95) + 1 + Math.floor(Math.random() * 10) / 10
-      const paid = Math.ceil(price / 10) * 10 + (Math.random() > 0.5 ? 10 : 0)
+      let paid = Math.ceil(price / 10) * 10 + (Math.random() > 0.5 ? 10 : 0)
+      // 保证付的一定比价格多，避免"找零 0 元"的退化题
+      if (paid <= price) paid += 10
       result.push({ type: 'change', data: { price: price.toFixed(1), paid } })
     } else {
       const types = ['yuan2jiao', 'jiao2fen', 'yuan2fen']

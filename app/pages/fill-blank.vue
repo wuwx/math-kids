@@ -6,12 +6,17 @@ const maxNumber = ref(999)
 const problems = ref<{ expression: string, answer: number }[]>([])
 
 function generate() {
+  // UInput 可能返回字符串，无效时保留上一次的题目
+  const n = toCount(count.value)
+  const max = Number(maxNumber.value)
+  if (!n || !Number.isFinite(max) || max < 20) return
+
   const result: { expression: string, answer: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 4)
-    const a = Math.floor(Math.random() * maxNumber.value) + 10
-    const b = Math.floor(Math.random() * Math.min(a - 1, maxNumber.value)) + 1
+    const a = Math.floor(Math.random() * (max - 9)) + 10 // 不超过数字上限
+    const b = Math.floor(Math.random() * Math.min(a - 1, max)) + 1
 
     let expression = ''
     let answer = 0

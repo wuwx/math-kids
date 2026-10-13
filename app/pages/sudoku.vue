@@ -14,14 +14,25 @@ function generateSudoku4x4(): { puzzle: (number | null)[][], solution: number[][
     [4, 3, 2, 1]
   ]
 
-  // 随机打乱行和列
+  // 随机打乱行和列（只交换同一宫带内的行/列，跨带交换会破坏 2×2 宫约束）
+  const swapRows = (r1: number, r2: number) => {
+    const tmp = sol[r1]!
+    sol[r1] = sol[r2]!
+    sol[r2] = tmp
+  }
+  const swapCols = (c1: number, c2: number) => {
+    for (const row of sol) {
+      const tmp = row[c1]!
+      row[c1] = row[c2]!
+      row[c2] = tmp
+    }
+  }
   for (let i = 0; i < 10; i++) {
-    const r1 = Math.floor(Math.random() * 2)
+    const band = Math.floor(Math.random() * 2)
     if (Math.random() > 0.5) {
-      const r2 = r1 + (Math.random() > 0.5 ? 0 : 1)
-      const tmp = sol[r1]!
-      sol[r1] = sol[r2]!
-      sol[r2] = tmp
+      swapRows(band * 2, band * 2 + 1)
+    } else {
+      swapCols(band * 2, band * 2 + 1)
     }
   }
 

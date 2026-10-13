@@ -11,17 +11,21 @@ function randomOp(): string {
 function generate() {
   const result: { left: string, right: string }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 3)
 
     if (type === 0) {
       // 两个加减法比较
       const a = Math.floor(Math.random() * 900) + 100
-      const b = Math.floor(Math.random() * 100) + 10
       const c = Math.floor(Math.random() * 900) + 100
-      const d = Math.floor(Math.random() * 100) + 10
       const op1 = randomOp()
       const op2 = randomOp()
+      // 减法保证被减数大于减数，结果非负
+      const b = op1 === '-' ? Math.floor(Math.random() * (a - 10)) + 10 : Math.floor(Math.random() * 100) + 10
+      const d = op2 === '-' ? Math.floor(Math.random() * (c - 10)) + 10 : Math.floor(Math.random() * 100) + 10
       result.push({
         left: `${a} ${op1} ${b}`,
         right: `${c} ${op2} ${d}`
@@ -38,14 +42,16 @@ function generate() {
       })
     } else {
       // 数字与算式比较
-      const a = Math.floor(Math.random() * 90) + 10
-      const b = Math.floor(Math.random() * 90) + 10
       const op = randomOp()
-      const num = op === '+' ? a + b + Math.floor(Math.random() * 20) - 10 : a - b + Math.floor(Math.random() * 20) - 10
+      const a = Math.floor(Math.random() * 90) + 10
+      // 减法保证被减数大于减数，结果非负
+      const b = op === '-' ? Math.floor(Math.random() * (a - 10)) + 10 : Math.floor(Math.random() * 90) + 10
+      // 对照数与真实值相差 -10 ~ +10，保证 >、<、= 都可能出现
+      const num = Math.max(0, (op === '+' ? a + b : a - b) + Math.floor(Math.random() * 21) - 10)
       if (Math.random() > 0.5) {
-        result.push({ left: `${a} ${op} ${b}`, right: `${Math.abs(num)}` })
+        result.push({ left: `${a} ${op} ${b}`, right: `${num}` })
       } else {
-        result.push({ left: `${Math.abs(num)}`, right: `${a} ${op} ${b}` })
+        result.push({ left: `${num}`, right: `${a} ${op} ${b}` })
       }
     }
   }

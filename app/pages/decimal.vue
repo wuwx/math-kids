@@ -18,10 +18,10 @@ function toggleOperator(op: string) {
   generate()
 }
 
-function randomDecimal(): string {
+function randomDecimal(places: number): string {
   const intPart = Math.floor(Math.random() * 100)
-  const decPart = Math.floor(Math.random() * Math.pow(10, decimalPlaces.value))
-  return `${intPart}.${decPart.toString().padStart(decimalPlaces.value, '0')}`
+  const decPart = Math.floor(Math.random() * Math.pow(10, places))
+  return `${intPart}.${decPart.toString().padStart(places, '0')}`
 }
 
 function generate() {
@@ -30,11 +30,16 @@ function generate() {
     return
   }
 
+  // UInput 可能返回字符串，无效时保留上一次的题目
+  const n = toCount(count.value)
+  const places = toCount(decimalPlaces.value)
+  if (!n || !places) return
+
   const result: string[] = []
-  for (let i = 0; i < count.value; i++) {
+  for (let i = 0; i < n; i++) {
     const op = operators.value[Math.floor(Math.random() * operators.value.length)]
-    let a = randomDecimal()
-    let b = randomDecimal()
+    let a = randomDecimal(places)
+    let b = randomDecimal(places)
 
     // 减法确保结果为正
     if (op === '-' && parseFloat(a) < parseFloat(b)) {

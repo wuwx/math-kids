@@ -8,7 +8,10 @@ const problems = ref<{ a: number, b: number, op: string, answer: number }[]>([])
 function generate() {
   const result: { a: number, b: number, op: string, answer: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     let a: number, b: number, op: string, answer: number
 
     switch (calcType.value) {

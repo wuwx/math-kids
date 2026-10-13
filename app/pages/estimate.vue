@@ -7,7 +7,10 @@ const problems = ref<{ expression: string, answer: number }[]>([])
 function generate() {
   const result: { expression: string, answer: number }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 3)
     let a: number, b: number, op: string, answer: number
 

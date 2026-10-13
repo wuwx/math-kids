@@ -8,7 +8,10 @@ function generate() {
   const result: { question: string, answer: number }[] = []
   const places = ['个', '十', '百', '千']
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 4)
     const num = Math.floor(Math.random() * 9000) + 1000
     const digits = num.toString().split('').reverse()
@@ -21,11 +24,19 @@ function generate() {
         answer = parseInt(digits[pos]!)
         break
       }
-      case 1: { // 某数字在什么位
-        const pos = Math.floor(Math.random() * 4)
-        const digit = digits[pos]
-        question = `${num} 中，${digit} 在___位上`
-        answer = pos // 0=个,1=十,2=百,3=千
+      case 1: { // 某数字在什么位（只提问在数中唯一的数字，保证答案唯一）
+        const uniquePositions = [0, 1, 2, 3].filter(p => digits.filter(d => d === digits[p]).length === 1)
+        if (uniquePositions.length > 0) {
+          const pos = uniquePositions[Math.floor(Math.random() * uniquePositions.length)]!
+          const digit = digits[pos]!
+          question = `${num} 中，${digit} 在___位上`
+          answer = pos // 0=个,1=十,2=百,3=千
+        } else {
+          // 四个数字都重复时退化为"某位上是几"
+          const pos = Math.floor(Math.random() * 4)
+          question = `${num} 的${places[pos]}位上是___`
+          answer = parseInt(digits[pos]!)
+        }
         break
       }
       case 2: { // 某位表示多少

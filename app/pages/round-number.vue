@@ -9,7 +9,10 @@ function generate() {
   const result: { expression: string, answer: number }[] = []
   const target = targetType.value === 'ten' ? 10 : 100
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const a = Math.floor(Math.random() * (target - 1)) + 1
     const answer = target - a
     result.push({ expression: `${a} + ___ = ${target}`, answer })

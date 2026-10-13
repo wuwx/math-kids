@@ -22,7 +22,8 @@ const templates = [
     return { q: `${a}个糖果平均分给${b}个小朋友，每人分到多少个？`, a: c }
   } },
   { gen: () => {
-    const a = rand(20, 50), b = rand(10, 30), c = rand(5, 20)
+    // 先生成两项花费，再保证总钱数够花，避免出现负数答案
+    const b = rand(10, 30), c = rand(5, 20), a = b + c + rand(0, 20)
     return { q: `小明有${a}元，买文具花了${b}元，买零食花了${c}元，还剩多少元？`, a: a - b - c }
   } },
   { gen: () => {
@@ -53,7 +54,10 @@ function rand(min: number, max: number) {
 
 function generate() {
   const result: { question: string, answer: number }[] = []
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const template = templates[Math.floor(Math.random() * templates.length)]!
     const { q, a } = template.gen()
     result.push({ question: q, answer: a })

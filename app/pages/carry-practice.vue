@@ -36,10 +36,13 @@ function hasBorrow(a: number, b: number): boolean {
 }
 
 function generate() {
+  const n = toCount(count.value)
+  if (!n) return
+
   const result: string[] = []
   let attempts = 0
 
-  while (result.length < count.value && attempts < count.value * 100) {
+  while (result.length < n && attempts < n * 100) {
     attempts++
 
     if (mode.value === 'carry' || (mode.value === 'both' && Math.random() > 0.5)) {

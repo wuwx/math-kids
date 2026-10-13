@@ -23,7 +23,10 @@ function lcm(a: number, b: number): number {
 function generate() {
   const result: { question: string, answer: string }[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     const type = Math.floor(Math.random() * 5)
     let question: string, answer: string
 
@@ -35,18 +38,31 @@ function generate() {
         answer = factors.join(', ')
         break
       }
-      case 1: { // 判断因数
+      case 1: { // 判断因数（按概率生成"否"的情况，避免答案恒为"是"）
         const a = Math.floor(Math.random() * 10) + 2
-        const b = a * (Math.floor(Math.random() * 10) + 2)
-        question = `${a} 是 ${b} 的因数吗？___（是/否）`
-        answer = '是'
+        if (Math.random() > 0.4) {
+          const b = a * (Math.floor(Math.random() * 10) + 2)
+          question = `${a} 是 ${b} 的因数吗？___（是/否）`
+          answer = '是'
+        } else {
+          // 加上小于 a 的非零余数，保证 a 不是 b 的因数
+          const b = a * (Math.floor(Math.random() * 10) + 2) + Math.floor(Math.random() * (a - 1)) + 1
+          question = `${a} 是 ${b} 的因数吗？___（是/否）`
+          answer = '否'
+        }
         break
       }
-      case 2: { // 判断倍数
+      case 2: { // 判断倍数（按概率生成"否"的情况）
         const a = Math.floor(Math.random() * 10) + 2
-        const b = a * (Math.floor(Math.random() * 10) + 2)
-        question = `${b} 是 ${a} 的倍数吗？___（是/否）`
-        answer = '是'
+        if (Math.random() > 0.4) {
+          const b = a * (Math.floor(Math.random() * 10) + 2)
+          question = `${b} 是 ${a} 的倍数吗？___（是/否）`
+          answer = '是'
+        } else {
+          const b = a * (Math.floor(Math.random() * 10) + 2) + Math.floor(Math.random() * (a - 1)) + 1
+          question = `${b} 是 ${a} 的倍数吗？___（是/否）`
+          answer = '否'
+        }
         break
       }
       case 3: { // 最大公因数

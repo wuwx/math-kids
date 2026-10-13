@@ -7,14 +7,22 @@ const maxDivisor = ref(9)
 const problems = ref<{ dividend: number, divisor: number }[]>([])
 
 function generate() {
+  // UInput 可能返回字符串，无效时保留上一次的题目
+  const n = toCount(count.value)
+  const dividendLimit = Number(maxDividend.value)
+  const divisorLimit = Number(maxDivisor.value)
+  if (!n || !Number.isFinite(dividendLimit) || dividendLimit < 10 || !Number.isFinite(divisorLimit) || divisorLimit < 2) return
+
   const result: { dividend: number, divisor: number }[] = []
   const used = new Set<string>()
+  // 除数必须小于被除数上限，否则会生成除数大于被除数、超出上限的非法题
+  const maxDiv = Math.max(2, Math.min(Math.floor(divisorLimit), Math.floor(dividendLimit) - 1))
 
   let attempts = 0
-  while (result.length < count.value && attempts < count.value * 100) {
+  while (result.length < n && attempts < n * 100) {
     attempts++
-    const divisor = Math.floor(Math.random() * (maxDivisor.value - 2 + 1)) + 2
-    const dividend = Math.floor(Math.random() * (maxDividend.value - divisor)) + divisor + 1
+    const divisor = Math.floor(Math.random() * (maxDiv - 1)) + 2
+    const dividend = Math.floor(Math.random() * (dividendLimit - divisor)) + divisor + 1
 
     // 确保有余数
     if (dividend % divisor === 0) continue

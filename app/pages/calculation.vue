@@ -37,7 +37,7 @@ function applyPreset(preset: string) {
       count.value = 16
       break
   }
-  generate()
+  // 修改设置后由防抖 watch 统一触发重新生成，避免一次点击生成两次
 }
 
 function generate() {
@@ -46,13 +46,21 @@ function generate() {
     return
   }
 
+  // UInput 可能返回字符串（如清空后为 ''），无效时保留上一次的题目
+  const n = toCount(count.value)
+  const min = Number(minNumber.value)
+  const max = Number(maxNumber.value)
+  if (!n || !Number.isFinite(min) || !Number.isFinite(max)) return
+  const lo = Math.min(min, max)
+  const hi = Math.max(min, max)
+
   const result: string[] = []
-  for (let i = 0; i < count.value; i++) {
+  for (let i = 0; i < n; i++) {
     const op = operators.value[Math.floor(Math.random() * operators.value.length)]
 
     for (let j = 0; j < 100; j++) {
-      const x = Math.floor(Math.random() * (maxNumber.value - minNumber.value + 1)) + minNumber.value
-      const y = Math.floor(Math.random() * (maxNumber.value - minNumber.value + 1)) + minNumber.value
+      const x = Math.floor(Math.random() * (hi - lo + 1)) + lo
+      const y = Math.floor(Math.random() * (hi - lo + 1)) + lo
 
       if (op === '-' && x <= y) continue
 

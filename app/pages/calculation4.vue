@@ -9,7 +9,10 @@ function generate() {
   const ops = ['+', '-']
   const result: string[] = []
 
-  for (let i = 0; i < count.value; i++) {
+  const n = toCount(count.value)
+  if (!n) return
+
+  for (let i = 0; i < n; i++) {
     for (let j = 0; j < 100; j++) {
       const a = Math.floor(Math.random() * 900) + 100
       const b = Math.floor(Math.random() * 900) + 100
